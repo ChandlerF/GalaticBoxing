@@ -24,10 +24,17 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     private Rigidbody _rb;
     private PhotonView _pv;
 
+    private const float _maxHealth = 100f;
+    private float _currentHealth = _maxHealth;
+
+    private PlayerManager _playerManager;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _pv = GetComponent<PhotonView>();
+
+        _playerManager = PhotonView.Find((int)_pv.InstantiationData[0]).GetComponent<PlayerManager>();
     }
 
     private void Start()
@@ -186,6 +193,17 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         if (!_pv.IsMine)
             return;
 
-        Debug.Log(damage);
+        _currentHealth -= damage;
+
+        if(_currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+
+    private void Die()
+    {
+        _playerManager.Die();
     }
 }
