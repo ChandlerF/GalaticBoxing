@@ -100,6 +100,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         {
             _items[_itemIndex].Use();
         }
+
+        //Die when you fall off the map
+        if(transform.position.y < -10f)
+        {
+            Die();
+        }
     }
 
 
