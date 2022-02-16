@@ -127,7 +127,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     private void Move()
     {
-        Vector3 moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        Vector3 moveDir = Vector3.zero;
+        moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
 
         _moveAmount = Vector3.SmoothDamp(_moveAmount, moveDir * (Input.GetKey(KeyCode.LeftShift) && _grounded ? _sprintSpeed : _walkSpeed), ref _smoothMoveVelocity, _smoothTime);
 
