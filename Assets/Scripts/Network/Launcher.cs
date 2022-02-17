@@ -103,6 +103,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.JoinRoom(info.Name);
 
+        RoomManager.Instance.CanChangeTeams = true;
+
         MenuManager.Instance.OpenMenu("LoadingMenu");
     }
 

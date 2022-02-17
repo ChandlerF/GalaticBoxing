@@ -46,6 +46,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         if (_pv.IsMine)
         {
             EquipItem(0);
+
+
+
+
+            int team = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+            Debug.Log(team);
+            if (team == 0) { _mouseSensitivity = 0f; }
+            else { _mouseSensitivity = 100f; }
         }
         else
         {
@@ -160,7 +168,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
         if (_pv.IsMine)
         {
+            
             Hashtable hash = new Hashtable();
+            //Hashtable hash = PhotonNetwork.LocalPlayer.CustomProperties;
             hash.Add("itemIndex", _itemIndex);
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }

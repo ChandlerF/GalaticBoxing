@@ -10,6 +10,19 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
     [SerializeField] private TMP_Text _text;
     private Player _player;
 
+
+    private void Start()
+    {
+        if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
+        {
+            RoomManager.Instance.SetTeam(1);
+        }
+        else
+        {
+            RoomManager.Instance.SetTeam(0);
+        }
+    }
+
     public void SetUp(Player player)
     {
         _player = player;
