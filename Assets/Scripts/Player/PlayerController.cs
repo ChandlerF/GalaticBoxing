@@ -49,11 +49,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
 
 
-
+            /*
             int team = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
             Debug.Log(team);
             if (team == 0) { _mouseSensitivity = 0f; }
-            else { _mouseSensitivity = 100f; }
+            else { _mouseSensitivity = 100f; }*/
         }
         else
         {
