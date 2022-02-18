@@ -208,12 +208,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     }
 
 
-    //Code runs on everyones computer, but only victim is affected, they have _pv.IsMine = true
+    //Code runs on everyones computer, but only victim is affected, because they have _pv.IsMine = true
     [PunRPC]
     private void RPC_TakeDamage(float damage)
     {
-        if (!_pv.IsMine)
-            return;
+        if (!_pv.IsMine) { return;}
 
         _currentHealth -= damage;
 

@@ -12,6 +12,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public static RoomManager Instance;
     public bool CanChangeTeams = true;
     public int Team = 0;
+    private PhotonView _pv;
 
     private void Awake()
     {
@@ -25,6 +26,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
             DontDestroyOnLoad(this);
             Instance = this;
         }
+
+        _pv = GetComponent<PhotonView>();
     }
 
     public override void OnEnable()
@@ -62,5 +65,21 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
             CanChangeTeams = false;
         }
+    }
+
+
+    public void SwapTeams()
+    {
+        _pv.RPC("RPC_SwapTeams", RpcTarget.All);
+        Launcher.Instance.SetUpPlayerListItems();
+    }
+
+    [PunRPC]
+    private void RPC_SwapTeams()
+    {
+        CanChangeTeams = true;
+
+        if(Team == 0) {SetTeam(1);}
+        else if(Team == 1) {SetTeam(0);}
     }
 }

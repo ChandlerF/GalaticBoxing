@@ -11,7 +11,7 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
     private Player _player;
 
 
-    private void Start()
+    private void Awake()
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
         {
@@ -27,6 +27,15 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
     {
         _player = player;
         _text.text = player.NickName;
+
+        Invoke("TextToTeamColor", 0.1f);
+    }
+
+    private void TextToTeamColor()
+    {
+        int team = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+        if (team == 0) { _text.color = Color.green; }
+        else if (team == 1) { _text.color = Color.red; }
     }
 
 
